@@ -5,21 +5,6 @@
   text-align: center;
 }
 
-
-/* div.vid-container { 
-  background-color: white; 
-  height: 50px; 
-  width: 50px;
-  border: 1px solid black;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  grid-template-rows: repeat(var(--grid-rows), 1fr);
-} */
-
-
 .video-container {
   position: relative;
   width: 800px;
@@ -53,17 +38,6 @@
   width: 100%;
   height: 100%;
   cursor: pointer;
+  border: 5px solid black; /* Optional: White border for visibility */
   background: rgba(0, 0, 0, 0.2); /* Optional: Slight dark tint for visibility */
-}
-
-/* Clip each div to show only its section */
-.vid-container::before {
-  content: "";
-  position: absolute;
-  width: calc(var(--grid-width) * 100%);
-  height: calc(var(--grid-height) * 100%);
-  top: calc(var(--row) * -100%);
-  left: calc(var(--col) * -100%);
-  background: inherit;
-  clip-path: inset(calc(var(--row) * 100%) calc((var(--grid-width) - var(--col) - 1) * 100%) calc((var(--grid-height) - var(--row) - 1) * 100%) calc(var(--col) * 100%));
 }
