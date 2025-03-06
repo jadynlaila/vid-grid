@@ -6,7 +6,7 @@
 }
 
 
-div.vid-container { 
+/* div.vid-container { 
   background-color: white; 
   height: 50px; 
   width: 50px;
@@ -17,5 +17,53 @@ div.vid-container {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   grid-template-rows: repeat(var(--grid-rows), 1fr);
+} */
 
+
+.video-container {
+  position: relative;
+  width: 800px;
+  height: 500px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.vid-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2); /* Optional: Slight dark tint for visibility */
+}
+
+/* Clip each div to show only its section */
+.vid-container::before {
+  content: "";
+  position: absolute;
+  width: calc(var(--grid-width) * 100%);
+  height: calc(var(--grid-height) * 100%);
+  top: calc(var(--row) * -100%);
+  left: calc(var(--col) * -100%);
+  background: inherit;
+  clip-path: inset(calc(var(--row) * 100%) calc((var(--grid-width) - var(--col) - 1) * 100%) calc((var(--grid-height) - var(--row) - 1) * 100%) calc(var(--col) * 100%));
 }
