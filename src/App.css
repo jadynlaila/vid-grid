@@ -1,6 +1,6 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
+  margin: auto;
   padding: 2rem;
   text-align: center;
 }
@@ -44,7 +44,76 @@
 
 @media (max-width: 800px) {
   .video-container {
-    width: 90%;  /* Set width to 90% for smaller screens */
-    height: calc(90% * 500 / 800);  /* Maintain aspect ratio */
+    width: 750px;
+    height: calc(750px * (500 / 800));
+  }
+}
+@media (max-width: 750px) {
+  .video-container {
+    width: 700px;
+    height: calc(700px * (500 / 800))
+  }
+}
+
+@media (max-width: 700px) {
+  .video-container {
+    width: 650px;
+    height: calc(650px * (500 / 800))
+  }
+}
+
+@media (max-width: 650px) {
+  .video-container {
+    width: 600px;
+    height: calc(600 * (500 / 800));
+  }
+}
+
+@media (max-width: 600px) {
+  .video-container {
+    width: 550px;
+    height: calc(550px * (500 / 800))
+  }
+}
+
+@media (max-width: 550px) {
+  .video-container {
+    width: 500px;
+    height: calc(500px * (500 / 800))
+  }
+}
+
+@media (max-width: 500px) {
+  .video-container {
+    width: 450px;
+    height: calc(450px * (500 / 800))
+  }
+}
+
+@media (max-width: 450px) {
+  .video-container {
+    width: 400px;
+    height: calc(400px * (500 / 800))
+  }
+}
+
+@media (max-width: 400px) {
+  .video-container {
+    width: 350px;
+    height: calc(350px * (500 / 800))
+  }
+}
+
+@media (max-width: 350px) {
+  .video-container {
+    width: 300px;
+    height: calc(300px * (500 / 800))
+  }
+}
+
+@media (max-width: 300px) {
+  .video-container {
+    width: 250px;
+    height: calc(250px * (500 / 800))
   }
 }
