@@ -41,3 +41,45 @@
   border: 3px solid black;
   background: rgba(0, 0, 0, 0.2); 
 }
+
+@media (max-width: 800px) {
+  .video-container {
+    width: 700px;
+    height: 437.5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .video-container {
+    width: 600px;
+    height: 375px;
+  }
+}
+
+@media (max-width: 600px) {
+  .video-container {
+    width: 500px;
+    height: 312.5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .video-container {
+    width: 400px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 400px) {
+  .video-container {
+    width: 300px;
+    height: 187.5px;
+  }
+}
+
+@media (max-width: 300px) {
+  .video-container {
+    width: 200px;
+    height: 125px;
+  }
+}
