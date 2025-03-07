@@ -1,33 +1,42 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const videoUrls = [
-    "/tapes.mp4", "/tvs.mp4", "/rolling.mp4", "/noise.mp4", "/fountain.mp4",
-    "/rushing.mp4", "/japan.mp4", "more-tvs.mp4", "/osprey.mp4", "/flock.mp4",
-    "/metro.mp4", "/money.mp4"
-  ];
-  const croppedFolders = ["/fountain_cropped", "japan_cropped"];
+  const croppedFolders = ["/flock_cropped", "/fountain_cropped", "/japan_cropped", "/metro_cropped", "/money_cropped", "/more-tvs_cropped", "/noise_cropped", "/osprey_cropped", "/rolling_cropped", "/rushing_cropped", "/shake_cropped", "/tapes_cropped", "/tvs_cropped"];
   const numberOfGrids = 9;
   const gridWidth = 3;
   const gridHeight = Math.ceil(numberOfGrids / gridWidth);
 
-  const videoRef = useRef(null);
-  const [videoSrc, setVideoSrc] = useState(videoUrls[0]); // Default video
+
+  const [videoSources, setVideoSources] = useState(
+    Array.from({ length: gridHeight }, (_, rowIndex) =>
+      Array.from({ length: gridWidth }, (_, colIndex) => {
+        const folderIndex = Math.floor(Math.random() * croppedFolders.length);
+        return `${croppedFolders[folderIndex]}/${rowIndex}_${colIndex}.mp4`;
+      })
+    )
+  );
 
   const changeVideo = (row, col) => {
-    console.log(row, col);
-    const newVideo = videoUrls[Math.floor(Math.random() * videoUrls.length)];
-    setVideoSrc(newVideo);
-  };
+    setVideoSources((prevSources) => {
+      const currentVideo = prevSources[row][col];
 
-  const generateFolderIndex = () => {
-    return Math.floor(Math.random() * croppedFolders.length);
-  }
+      const availableVideos = croppedFolders
+        .map(folder => `${folder}/${row}_${col}.mp4`)
+        .filter(video => video !== currentVideo);
+
+      if (availableVideos.length === 0) return prevSources; 
+
+      const newVideo = availableVideos[Math.floor(Math.random() * availableVideos.length)];
+
+      const newSources = prevSources.map((r) => [...r]); 
+      newSources[row][col] = newVideo; 
+      return newSources;
+    });
+  };
 
   return (
     <div className="video-container">
-      {/* <video ref={videoRef} src={videoSrc} autoPlay loop muted /> */}
       <div
         className="grid-container"
         style={{
@@ -35,22 +44,17 @@ function App() {
           "--grid-rows": gridHeight,
         }}
       >
-        {Array.from({ length: gridHeight }).map((_, rowIndex) => (
-          Array.from({ length: gridWidth }).map((_, colIndex) => {
-            let folderIndex = generateFolderIndex(); 
-            const videoFileName = `${croppedFolders[folderIndex]}/${rowIndex}_${colIndex}.mp4`; // Naming convention
-            console.log(videoFileName);
-            return (
-              <div
-                className="vid-container"
-                key={`${rowIndex}-${colIndex}`}
-                onClick={() => changeVideo(rowIndex, colIndex)}
-              >
-                <video src={videoFileName} autoPlay loop muted />
-              </div>
-            );
-          })
-        ))}
+        {videoSources.map((row, rowIndex) =>
+          row.map((videoSrc, colIndex) => (
+            <div
+              className="vid-container"
+              key={`${rowIndex}-${colIndex}`}
+              onClick={() => changeVideo(rowIndex, colIndex)}
+            >
+              <video src={videoSrc} autoPlay loop muted />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
