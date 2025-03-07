@@ -4,19 +4,19 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 public_folder = os.path.abspath(os.path.join(script_dir, "../..", "public"))  # Adjust path to the public folder
 
-input_video = os.path.join(public_folder, "tvs.mp4")
+input_video = os.path.join(public_folder, "japan.mp4")
 input_name = os.path.splitext(os.path.basename(input_video))[0]
 
-numRows = 3
-numCols = 3
+numRows = 5
+numCols = 5
 video_width = 800  # Final video width after resizing
 video_height = 500  # Final video height after resizing
 crop_width = video_width // numCols  # Integer division to avoid floating-point issues
 crop_height = video_height // numRows
 
-# Ensure output folder is inside the public folder
-output_folder = os.path.abspath(os.path.join(public_folder, f"{input_name}_cropped"))
-os.makedirs(output_folder, exist_ok=True)
+# Set the output folder to 'public/25x25'
+output_folder = os.path.join(public_folder, "25x25", f"{input_name}_cropped")
+os.makedirs(output_folder, exist_ok=True)  # Create the folder if it doesn't exist
 
 # Resize the video to the correct dimensions
 resized_video = os.path.join(output_folder, f"{input_name}_resized.mp4")

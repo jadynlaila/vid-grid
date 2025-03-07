@@ -2,11 +2,11 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const croppedFolders = ["/flock_cropped", "/fountain_cropped", "/japan_cropped", "/metro_cropped", "/money_cropped", "/more-tvs_cropped", "/noise_cropped", "/osprey_cropped", "/rolling_cropped", "/rushing_cropped", "/shake_cropped", "/tapes_cropped", "/tvs_cropped"];
-  const numberOfGrids = 9;
-  const gridWidth = 3;
+  const croppedFolders = ["25x25/flock_cropped", "25x25/fountain_cropped", "25x25/japan_cropped", "25x25/metro_cropped", "25x25/money_cropped", "25x25/more-tvs_cropped", "25x25/noise_cropped", "25x25/osprey_cropped", "25x25/rolling_cropped", "25x25/rushing_cropped", "25x25/shake_cropped", "25x25/tapes_cropped", "25x25/tvs_cropped"];
+  const numberOfGrids = 25;
+  const gridWidth = 5;
   const gridHeight = Math.ceil(numberOfGrids / gridWidth);
-
+  
 
   const [videoSources, setVideoSources] = useState(
     Array.from({ length: gridHeight }, (_, rowIndex) =>
