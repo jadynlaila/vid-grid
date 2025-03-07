@@ -2,11 +2,23 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const croppedFolders = ["25x25/flock_cropped", "25x25/fountain_cropped", "25x25/japan_cropped", "25x25/metro_cropped", "25x25/money_cropped", "25x25/more-tvs_cropped", "25x25/noise_cropped", "25x25/osprey_cropped", "25x25/rolling_cropped", "25x25/rushing_cropped", "25x25/shake_cropped", "25x25/tapes_cropped", "25x25/tvs_cropped"];
+  // const croppedFolders = ["25x25/flock_cropped", "25x25/fountain_cropped", "25x25/japan_cropped", "25x25/metro_cropped", "25x25/money_cropped", "25x25/more-tvs_cropped", "25x25/noise_cropped", "25x25/osprey_cropped", "25x25/rolling_cropped", "25x25/rushing_cropped", "25x25/shake_cropped", "25x25/tapes_cropped", "25x25/tvs_cropped"];
+  const croppedFolders = ["25x25/flock_cropped", "25x25/fountain_cropped", "25x25/japan_cropped"];
   const numberOfGrids = 25;
   const gridWidth = 5;
   const gridHeight = Math.ceil(numberOfGrids / gridWidth);
-  
+
+  // future feature ideas:
+  // - randomly pause videos for half a second
+  // - randomly change the playback rate of some videos
+  // - randomly change filter effects on some videos
+  // - utilize ctrl + click 
+  // - randomize if it changes that video or all other videos
+  // - apply a grid over top of some videos to make them look like they're cropped again
+  // - holding down a click on the outside of the divs will pause all of them
+  // - holding down a click on the inside of the divs will pause only that one
+  // - animations for when the video changes
+  // - on load, have all videos load in one at a time
 
   const [videoSources, setVideoSources] = useState(
     Array.from({ length: gridHeight }, (_, rowIndex) =>
@@ -25,12 +37,12 @@ function App() {
         .map(folder => `${folder}/${row}_${col}.mp4`)
         .filter(video => video !== currentVideo);
 
-      if (availableVideos.length === 0) return prevSources; 
+      if (availableVideos.length === 0) return prevSources;
 
       const newVideo = availableVideos[Math.floor(Math.random() * availableVideos.length)];
 
-      const newSources = prevSources.map((r) => [...r]); 
-      newSources[row][col] = newVideo; 
+      const newSources = prevSources.map((r) => [...r]);
+      newSources[row][col] = newVideo;
       return newSources;
     });
   };
@@ -50,8 +62,27 @@ function App() {
               className="vid-container"
               key={`${rowIndex}-${colIndex}`}
               onClick={() => changeVideo(rowIndex, colIndex)}
+              style={{
+                position: "relative",
+                overflow: "hidden",
+              }}
             >
-              <video src={videoSrc} autoPlay loop muted />
+              <video
+                src={videoSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{
+                  position: "absolute",
+                  top: "0",
+                  left: "0",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  zIndex: "-1", 
+                }}
+              />
             </div>
           ))
         )}
@@ -61,4 +92,3 @@ function App() {
 }
 
 export default App;
-
